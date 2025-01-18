@@ -24,3 +24,21 @@ list	*ft_newnode(int	data)
 	tmp->next = NULL;
 	return (tmp);
 }
+
+
+void	ft_lstadd_back(list **lst, list *new)
+{
+	list	*tmp;
+
+	if (!lst || !new)
+		return ;
+	tmp = *lst;
+	if (*lst)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	else
+		*lst = new;
+}
