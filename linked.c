@@ -1,0 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayouahid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/18 18:32:55 by ayouahid          #+#    #+#             */
+/*   Updated: 2025/01/18 18:32:57 by ayouahid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <push.h>
+#include <stdio.h>
+
+list	*ft_newnode(int	data)
+{
+	list *tmp;
+
+	tmp = (list	*)malloc(sizeof(list));
+	if(!tmp)
+		return (NULL);
+	tmp->data = data;
+	tmp->next = NULL;
+	return (tmp);
+}
