@@ -8,8 +8,14 @@ typedef struct list
 
 }	list;
 
+//--------------linked lists functions ----------//
 list	*ft_newnode(int	data);
 void	ft_lstadd_back(list **lst, list *new);
+
+
+//-------------parse functions-------------//
 char	**ft_split(char const *s, char c);
+
+
 
 #endif
