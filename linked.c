@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push.h>
+#include "push.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 list	*ft_newnode(int	data)
 {

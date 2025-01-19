@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <push.h>
+#include "push.h"
 
 // strchr
 char	*ft_strchr(const char *str, int c)
@@ -203,42 +203,82 @@ int	ft_isdigit(int a)
 // 	printf("%s\n", pile_usr);
 // }
 
+void	printlist(list *head)
+{
+	list	*tmp;
+	tmp = head;
+	while (tmp != NULL)
+	{
+		printf("%d\n", tmp->data);
+		tmp = tmp->next;
+	}
+}
 
+int check(char *av)
+{
+	// int i;
 
-void	stock_arg(int ac, char **av)
+	// i = 0;
+	// while (av[i] != '\0')
+	// {
+	// 	if (ft_isdigit(av[i]))
+
+	// }
+	
+}
+
+list	*stock_arg(int ac, char **av)
 {
 	list *head;
 	int	i;
 	int j;
+	list *new;
+	char **str_arg;
 
 	i = 1;
 	head = NULL;
 	if (ac >= 2)
-	{
-		
+	{	
 		while(av[i])
 		{
 			j = 0;
+			// free(new);
 			while (av[i][j])
 			{
-				if (!ft_isdigit(av[i][j]) || av[i][j] != 32)
+				// printf("%c\n", av[i][j]);
+				if (!ft_isdigit(av[i][j]) && av[i][j] != 32)
+				{
 					return (NULL);
+				}
 				j++;
 			}
-			i++;	
+			if (ft_strchr(av[i], 32))
+			{
+				j = 0;
+				str_arg = ft_split(av[i], 32);
+				while (str_arg[j])
+				{
+					new = ft_newnode(ft_atoi(str_arg[j]));
+					ft_lstadd_back(&head, new);
+					j++;
+				}
+			}
+			else
+			{
+				new = ft_newnode(ft_atoi(av[i]));
+				ft_lstadd_back(&head, new);
+			}
+			i++;
 		}
-		
+		return(head);
 	}
 } 
 
-
-
 int	main(int ac, char **av)
 {
-	list *head;
-
-	head = NULL;
-	stock_arg(ac , av);
+	list	*head;
+	head = stock_arg(ac , av);
+	printlist(head);
 
 }
 
