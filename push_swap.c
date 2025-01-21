@@ -241,6 +241,8 @@ list	*stock_arg(int ac, char **av)
 	{	
 		while(av[i])
 		{
+			if(av[i][0] == '\0')
+				return (NULL);
 			j = 0;
 			// free(new);
 			while (av[i][j])
@@ -281,5 +283,3 @@ int	main(int ac, char **av)
 	printlist(head);
 
 }
-
-
