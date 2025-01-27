@@ -202,6 +202,22 @@ int	ft_isdigit(int a)
 // 	// iterer dans le tableau
 // 	printf("%s\n", pile_usr);
 // }
+char	*isvalid(char *av)
+{
+	int	i;
+
+	i = 0;
+	if (av[0] != '-' && av[0] != '+' && !ft_isdigit(av[0]))
+		return (NULL);
+	i++;
+	while (av[i] !=  '\0')
+	{
+		if(!ft_isdigit(av[i]))
+			return (NULL);
+		i++;
+	}
+	return ("is valid ");
+}
 
 void	printlist(list *head)
 {
@@ -214,17 +230,22 @@ void	printlist(list *head)
 	}
 }
 
-int check(char *av)
-{
-	// int i;
+int	check(list *head)
+{	
+	int	data_act;
 
-	// i = 0;
-	// while (av[i] != '\0')
-	// {
-	// 	if (ft_isdigit(av[i]))
-
-	// }
-	
+	while (head->next != NULL)
+	{
+		data_act = head->data;
+		head = head->next;
+		while (head->next)
+		{
+			if (data_act == head->data)
+				return 1;
+			head =head->next;
+		}
+	}
+	return 0;
 }
 
 list	*stock_arg(int ac, char **av)
@@ -244,14 +265,10 @@ list	*stock_arg(int ac, char **av)
 			if(av[i][0] == '\0')
 				return (NULL);
 			j = 0;
-			// free(new);
 			while (av[i][j])
-			{
-				// printf("%c\n", av[i][j]);
-				if (!ft_isdigit(av[i][j]) && av[i][j] != 32)
-				{
+			{	
+				if (!ft_isdigit(av[i][j]) && av[i][j] != 32 && (av[i][j] != '+' && av[i][j] != '-'))
 					return (NULL);
-				}
 				j++;
 			}
 			if (ft_strchr(av[i], 32))
@@ -260,6 +277,8 @@ list	*stock_arg(int ac, char **av)
 				str_arg = ft_split(av[i], 32);
 				while (str_arg[j])
 				{
+					if (!isvalid(str_arg[j]))
+						return (NULL);
 					new = ft_newnode(ft_atoi(str_arg[j]));
 					ft_lstadd_back(&head, new);
 					j++;
@@ -267,14 +286,21 @@ list	*stock_arg(int ac, char **av)
 			}
 			else
 			{
+				if (!isvalid(av[i]))
+					return (NULL);
 				new = ft_newnode(ft_atoi(av[i]));
 				ft_lstadd_back(&head, new);
 			}
 			i++;
 		}
+		if (check(head) == 1)
+			return (NULL);
+	
 		return(head);
 	}
-} 
+	else
+		return (NULL);
+}
 
 int	main(int ac, char **av)
 {
