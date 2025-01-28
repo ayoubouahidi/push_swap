@@ -238,12 +238,14 @@ int	check(list *head)
 	{
 		data_act = head->data;
 		head = head->next;
-		while (head->next)
+		while (head->next != NULL)
 		{
 			if (data_act == head->data)
 				return 1;
-			head =head->next;
+			printf("the data in check fct :%d the data act is :%d\n", head->data, data_act);
+			head = head->next;
 		}
+		
 	}
 	return 0;
 }
@@ -295,7 +297,6 @@ list	*stock_arg(int ac, char **av)
 		}
 		if (check(head) == 1)
 			return (NULL);
-	
 		return(head);
 	}
 	else
