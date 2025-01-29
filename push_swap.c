@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "push.h"
-
+#include "./ft_printf/ft_printf.h"
 // strchr
 char	*ft_strchr(const char *str, int c)
 {
@@ -202,12 +202,24 @@ int	ft_isdigit(int a)
 // 	// iterer dans le tableau
 // 	printf("%s\n", pile_usr);
 // }
+int	lenght(char *av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i] != '\0')
+		i++;
+	return (i);
+}
+
 char	*isvalid(char *av)
 {
 	int	i;
 
 	i = 0;
 	if (av[0] != '-' && av[0] != '+' && !ft_isdigit(av[0]))
+		return (NULL);
+	if((av[0] == '-' || av[0] == '+') && lenght(av) == 1)
 		return (NULL);
 	i++;
 	while (av[i] !=  '\0')
@@ -216,6 +228,8 @@ char	*isvalid(char *av)
 			return (NULL);
 		i++;
 	}
+	// if (i == 1)
+	// 	return(NULL);
 	return ("is valid ");
 }
 
@@ -233,19 +247,19 @@ void	printlist(list *head)
 int	check(list *head)
 {	
 	int	data_act;
+	list *tmp;
 
-	while (head->next != NULL)
+	while (head)
 	{
 		data_act = head->data;
 		head = head->next;
-		while (head->next != NULL)
+		tmp = head;
+		while (tmp)
 		{
-			if (data_act == head->data)
+			if (data_act == tmp->data)
 				return 1;
-			printf("the data in check fct :%d the data act is :%d\n", head->data, data_act);
-			head = head->next;
+			tmp = tmp->next;
 		}
-		
 	}
 	return 0;
 }
@@ -260,8 +274,9 @@ list	*stock_arg(int ac, char **av)
 
 	i = 1;
 	head = NULL;
+	// ft_printf("ayoub ouahidi\n");
 	if (ac >= 2)
-	{	
+	{
 		while(av[i])
 		{
 			if(av[i][0] == '\0')
@@ -307,6 +322,9 @@ int	main(int ac, char **av)
 {
 	list	*head;
 	head = stock_arg(ac , av);
+	if (stock_arg(ac , av) == NULL)
+		ft_printf("Error");
 	printlist(head);
+
 
 }

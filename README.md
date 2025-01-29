@@ -18,6 +18,7 @@ pb and pa-- ra rb ----- rra rrb ----- rrr  ------  sa ---sb --ss can merge into 
 --------- you cannn allocate to every chunks or maniplate them in the the same sorted array with the index and the  rannge or start and end
 
 
-
-
+* ******************************************************
+cc -g3 *.c -L./ft_printf -lftprintf -o push_swap
+* ******************************************************
 

@@ -1,6 +1,7 @@
 #ifndef PUSH_H
 # define PUSH_H
 
+#include "./ft_printf/ft_printf.h"
 typedef struct list
 {
 	int			data;
