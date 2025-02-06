@@ -44,3 +44,24 @@ void	ft_lstadd_back(list **lst, list *new)
 	else
 		*lst = new;
 }
+
+int	ft_lstsize(list *lst)
+{
+	int	cmpt;
+
+	cmpt = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		cmpt++;
+	}
+	return (cmpt);
+}
+
+void	ft_lstadd_front(list **lst, list *new)
+{
+	if (new == NULL || lst == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}

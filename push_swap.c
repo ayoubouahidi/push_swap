@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+
 #include <stdlib.h>
 #include "push.h"
 #include "./ft_printf/ft_printf.h"
+#include <stdio.h>
+
 // strchr
 char	*ft_strchr(const char *str, int c)
 {
@@ -321,10 +323,35 @@ list	*stock_arg(int ac, char **av)
 int	main(int ac, char **av)
 {
 	list	*head;
+	// list	*head_b;
+
 	head = stock_arg(ac , av);
+	// head_b = NULL;
+
 	if (stock_arg(ac , av) == NULL)
 		ft_printf("Error");
-	printlist(head);
+	// swapping 
+	// swap(head, 'b');
+	// swap_ab(head, head_b);
 
+	// //	pushing
+	printlist(head); 
+	// push(&head, &head_b);
+	// push(&head, &head_b);
+	// // push(&head, &head_b);
+	// // push(&head, &head_b);
+
+
+	// // push_b(&head_b, &head);
+	// // push_b(&head_b, &head);
+	// // push_b(&head_b, &head);
+	// // push_b(&head_b, &head);
+
+	// // //printing
+	// ft_printf("pile a   : -----------------------\n");
+	// printlist(head); 
+
+	// ft_printf("pile b	 : -----------------------\n");
+	// printlist(head_b);
 
 }

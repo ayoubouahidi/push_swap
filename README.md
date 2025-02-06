@@ -6,7 +6,7 @@
 //empty sstring : 233 ""
 //sign : 45 - 4 444 5556 + 
 // one argument : 1 ---- should desplay a newline not error
-
+ 
 //----------- dont forget to check the leak ------------------------//
 
 //-------------------actions ------------------//
@@ -20,5 +20,7 @@ pb and pa-- ra rb ----- rra rrb ----- rrr  ------  sa ---sb --ss can merge into 
 
 * ******************************************************
 cc -g3 *.c -L./ft_printf -lftprintf -o push_swap
+
+gdb ./push_swap 
 * ******************************************************
 
