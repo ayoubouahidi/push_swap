@@ -65,3 +65,20 @@ void	ft_lstadd_front(list **lst, list *new)
 	new->next = *lst;
 	*lst = new;
 }
+
+list	*ft_lstlast(list *lst)
+{
+	list	*last;
+
+	if (!lst)
+		return (NULL);
+	while (lst != NULL)
+	{
+		if (lst->next == NULL)
+		{
+			last = lst;
+		}
+		lst = lst->next;
+	}
+	return (last);
+}

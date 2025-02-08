@@ -22,7 +22,7 @@
 # .PHONY : all bonus re fclean clean
 
 # Variables
-SRC		= linked.c ft_split.c push_swap.c swap.c push.c
+SRC		= linked.c ft_split.c push_swap.c swap.c push.c rotate.c reverse.c
 CC		= cc
 OBJS	= $(SRC:.c=.o)
 CFLAGS	= -Wall -Wextra -Werror
