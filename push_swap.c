@@ -329,38 +329,46 @@ int	main(int ac, char **av)
 	head_b = NULL;
 
 	if (stock_arg(ac , av) == NULL)
-		ft_printf("Error");
+		return(ft_printf("Error"),1);
 	// ********** */swapping 
 	// swap(head, 'b');
 	// swap_ab(head, head_b);
 
 	// //	********** */pushing
 	// printlist(head); 
-	push(&head, &head_b);
+	// push(&head, &head_b);
 	// push(&head, &head_b);
 	// push(&head, &head_b);
 	// push(&head, &head_b);
 
 
-	push_b(&head_b, &head);
+	// push_b(&head_b, &head);
 	// push_b(&head_b, &head);
 	// push_b(&head_b, &head);
 	// push_b(&head_b, &head);
 
 	// //********** */ rotation
 	// rotate(&head, 'a');
+	// rotate(&head_b, 'b');
 	// rotate_ab(&head, &head_b);
 
 	// //	********** */reverse
 	// reverse(&head,'a');
 	// reverse(&head_b, 'b');
-	reverse_ab(&head, &head_b);
+	// reverse_ab(&head, &head_b);
 
+	// //	********** */ ssorting 
+	printf("the head data is :%d \nthe next data is %d\n the next next head is : %d\n" , head->data, head->next->data, head->next->next->data);
+	// sort_two_numbers(&head->data, &head->next->data);
+	// sort_two_numbers(&head->data, &head->next->data);
+	printlist(head); 
+	sort_tree_numbers(&head->data, &head->next->data, &head->next->next->data);
 	// // //********** */printing
 	ft_printf("pile a   : -----------------------\n");
-	printlist(head); 
-
+	printlist(head);
 	ft_printf("pile b	 : -----------------------\n");
 	printlist(head_b);
+
+	
 
 }
