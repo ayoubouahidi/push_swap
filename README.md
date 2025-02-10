@@ -24,3 +24,5 @@ cc -g3 *.c -L./ft_printf -lftprintf -o push_swap
 gdb ./push_swap 
 * ******************************************************
 
+./push_swap 5 4 3 1 2 | ./checker_linux 5 4 3 2 1
+

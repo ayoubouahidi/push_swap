@@ -327,7 +327,7 @@ int	main(int ac, char **av)
 
 	head = stock_arg(ac , av);
 	head_b = NULL;
-
+	head_b++;
 	if (stock_arg(ac , av) == NULL)
 		return(ft_printf("Error"),1);
 	// ********** */swapping 
@@ -358,18 +358,19 @@ int	main(int ac, char **av)
 	// reverse_ab(&head, &head_b);
 
 	// //	********** */ ssorting 
-	printf("the head data is :%d \nthe next data is %d\n the next next head is : %d\n" , head->data, head->next->data, head->next->next->data);
+	// printf("the head data is :%d \nthe next data is %d\n the next next head is : %d\n" , head->data, head->next->data, head->next->next->data);
 	// sort_two_numbers(&head->data, &head->next->data);
 	// sort_two_numbers(&head->data, &head->next->data);
-	printlist(head); 
+	// printlist(head); 
 	// sort_tree_numbers(&head->data, &head->next->data, &head->next->next->data);
 	// sort_four_numbers(&head, &head_b);
-	sort_five_numbers(&head, &head_b);
+	// sort_five_numbers(&head, &head_b);
+	sort_tree_numbers(&head);
 	// // //********** */printing
-	ft_printf("pile a   : -----------------------\n");
+	// ft_printf("pile a   : -----------------------\n");
 	printlist(head);
-	ft_printf("pile b	 : -----------------------\n");
-	printlist(head_b);
+	// ft_printf("pile b	 : -----------------------\n");
+	// printlist(head_b);
 
 	
 

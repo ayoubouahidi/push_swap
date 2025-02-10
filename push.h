@@ -35,8 +35,8 @@ void	reverse(list **head, char t);
 void	reverse_ab(list **head_a, list **head_b);
 
 //-------------sorting functions-------------//
-void	sort_two_numbers(int *a, int *b);
-void	sort_tree_numbers(int *a, int *b, int *c);
+void	sort_two_numbers(list **head);
+void	sort_tree_numbers(list **head);
 void	sort_four_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
