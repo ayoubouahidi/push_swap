@@ -40,5 +40,6 @@ void	sort_tree_numbers(list **head);
 void	sort_four_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
+void	sort_five_2(list **head_a, list **head_b);
 
 #endif

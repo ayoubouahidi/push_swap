@@ -364,8 +364,10 @@ int	main(int ac, char **av)
 	// printlist(head); 
 	// sort_tree_numbers(&head->data, &head->next->data, &head->next->next->data);
 	// sort_four_numbers(&head, &head_b);
+	// sort_tree_numbers(&head);
+	// sort_two_numbers(&head);
 	// sort_five_numbers(&head, &head_b);
-	sort_tree_numbers(&head);
+	sort_five_2(&head, &head_b);
 	// // //********** */printing
 	// ft_printf("pile a   : -----------------------\n");
 	printlist(head);
