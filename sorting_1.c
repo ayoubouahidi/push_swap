@@ -88,33 +88,6 @@ void	do_rotate(list **head_a, list **head_b)
 	push(head_a, head_b);
 }
 
-void	sort_four_numbers(list **head_a, list **head_b)
-{
-
-	int pt;
-	int index;
-	list *tmp;
-
-	tmp = *head_a;
-	pt = petit_node(&tmp);
-	index = find_index(&tmp, pt);
-	if (index == 1)
-	{
-		rotate(head_a, 'a');
-		push(head_a, head_b);
-	}
-	else if (index == 2)
-	{
-		rotate(head_a, 'a');
-		rotate(head_a, 'a');
-		push(head_a, head_b);
-	}
-	else if (index == 0)
-		push(head_a , head_b);
-	sort_tree_numbers(head_a);
-	push_b(head_b, head_a);
-}
-
 void	move_min(list **head_a, list **head_b, int index)
 {
 	if(index == 1)
@@ -134,49 +107,76 @@ void	move_min(list **head_a, list **head_b, int index)
 	push(head_a, head_b);
 }
 
+void	sort_four_numbers(list **head_a, list **head_b)
+{
+	int pt;
+	int index;
+	list *tmp;
 
-// void	sort_five_numbers(list **head_a, list **head_b)
-// {
-// 	int	pt_1;
-// 	int pt_2;
-// 	int	index;
-// 	int	index_1;
-// 	list *tmp;
-
-// 	tmp = *head_a;
-// 	pt_1 = petit_node(&tmp);
-// 	index = find_index(&tmp, pt_1);
-// 	move_min(head_a, head_b, index);
-// 	pt_2 = petit_node(head_a);
-// 	index_1 = find_index(head_a, pt_2);
-// 	if (index_1 == 1)
-// 		rotate(head_a, 'a');
-// 	else if(index_1 == 2)
-// 	{
-// 		rotate(head_a, 'a');
-// 		rotate(head_a, 'a');
-// 	}
-// 	else if(index_1 == 3)
-// 		reverse(head_a, 'a');
-// 	push(head_a, head_b);
-// 	sort_tree_numbers(head_a);
-// 	push_b(head_b, head_a);
-// 	push_b(head_b, head_a);
-// }
+	tmp = *head_a;
+	pt = petit_node(&tmp);
+	index = find_index(&tmp, pt);
+	// ft_printf("the pt is is %d\n", index);
+	if (index == 1)
+		rotate(head_a, 'a');
+	else if (index == 2)
+	{
+		rotate(head_a, 'a');
+		rotate(head_a, 'a');
+	}
+	else if (index == 3)
+		reverse(head_a, 'a');
+	push(head_a, head_b);
+	sort_tree_numbers(head_a);
+	push_b(head_b, head_a);
+}
 
 
-void	sort_five_2(list **head_a, list **head_b)
+
+
+void	sort_five_numbers(list **head_a, list **head_b)
 {
 	int	pt_1;
+	int pt_2;
 	int	index;
+	int	index_1;
 	list *tmp;
 
 	tmp = *head_a;
 	pt_1 = petit_node(&tmp);
 	index = find_index(&tmp, pt_1);
 	move_min(head_a, head_b, index);
+	pt_2 = petit_node(head_a);
+	index_1 = find_index(head_a, pt_2);
+	if (index_1 == 1)
+		rotate(head_a, 'a');
+	else if(index_1 == 2)
+	{
+		rotate(head_a, 'a');
+		rotate(head_a, 'a');
+	}
+	else if(index_1 == 3)
+		reverse(head_a, 'a');
+	push(head_a, head_b);
+	sort_tree_numbers(head_a);
+	push_b(head_b, head_a);
+	push_b(head_b, head_a);
+}
+
+
+int	check_if_sorted(list **head_a)
+{
+	list *tmp;
+
 	tmp = *head_a;
-	sort_four_numbers(head_a, head_b);
-	// ft_printf("head data %d\n", (*head_a)->data);
-	// push_b(head_b ,head_a);
+	if (*head_a == NULL || (*head_a)->next == NULL)
+		return 0;
+	// ft_printf("the head data is %d\n", (*head_a)->next->data);
+	while (tmp != NULL && tmp->next != NULL)
+	{
+		if(tmp->data > tmp->next->data)
+			return 1;
+		tmp = tmp->next;
+	}
+	return 0;
 }

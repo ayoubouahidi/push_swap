@@ -22,7 +22,7 @@ void	push(list **head_a, list **head_b)
 	tmp = *head_a;
 	*head_a = tmp->next;
 	ft_lstadd_front(head_b, tmp);
-	ft_printf("pa\n");
+	ft_printf("pb\n");
 }
 
 void	push_b(list **head_b, list **head_a)
@@ -33,6 +33,6 @@ void	push_b(list **head_b, list **head_a)
 		return;
 	tmp = *head_b;
 	*head_b = tmp->next;
-	ft_lstadd_front(head_a, tmp);
-	ft_printf("pb\n");
+	ft_lstadd_front(head_a, tmp);	
+	ft_printf("pa\n");
 }

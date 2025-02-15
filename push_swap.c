@@ -324,12 +324,22 @@ int	main(int ac, char **av)
 {
 	list	*head;
 	list	*head_b;
+	// int	size_head;
 
 	head = stock_arg(ac , av);
 	head_b = NULL;
 	head_b++;
 	if (stock_arg(ac , av) == NULL)
 		return(ft_printf("Error"),1);
+	// size_head = ft_lstsize(head);
+	// if (size_head <= 2)
+	// 	sort_two_numbers(&head);
+	// else if(size_head <= 3)
+	// 	sort_tree_numbers(&head);
+	// else if(size_head <= 4)
+	// 	sort_four_numbers(&head, &head_b);
+	// else if(size_head <= 5)
+	// 	sort_five_numbers(&head, &head_b);
 	// ********** */swapping 
 	// swap(head, 'b');
 	// swap_ab(head, head_b);
@@ -367,13 +377,22 @@ int	main(int ac, char **av)
 	// sort_tree_numbers(&head);
 	// sort_two_numbers(&head);
 	// sort_five_numbers(&head, &head_b);
-	sort_five_2(&head, &head_b);
+	// sort_five_2(&head, &head_b);
+	// **********************big so
+	// ft_printf("int is %d\n", check_if_sorted(&head));
+	check_if_sorted(&head);
+	if (check_if_sorted(&head))
+		big_sort(&head, &head_b);
+
+
+
 	// // //********** */printing
 	// ft_printf("pile a   : -----------------------\n");
-	printlist(head);
+	// printlist(head);
 	// ft_printf("pile b	 : -----------------------\n");
 	// printlist(head_b);
 
 	
 
 }
+

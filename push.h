@@ -15,7 +15,7 @@ void	ft_lstadd_back(list **lst, list *new);
 int		ft_lstsize(list *lst);
 void	ft_lstadd_front(list **lst, list *new);
 list	*ft_lstlast(list *lst);
-
+void	printlist(list *head);
 //-------------parse functions-------------//
 char	**ft_split(char const *s, char c);
 
@@ -38,8 +38,9 @@ void	reverse_ab(list **head_a, list **head_b);
 void	sort_two_numbers(list **head);
 void	sort_tree_numbers(list **head);
 void	sort_four_numbers(list **head_a, list **head_b);
+// void	sort_five_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
-void	sort_five_numbers(list **head_a, list **head_b);
-void	sort_five_2(list **head_a, list **head_b);
+void	big_sort(list **head_a, list **head_b);
+int	check_if_sorted(list **head_a);
 
 #endif
