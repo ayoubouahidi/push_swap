@@ -1,7 +1,7 @@
 #include "push.h"
 #include <stdlib.h>
 
-void	swap(int *a, int *b)
+void	swap_bubble(int *a, int *b)
 {
 	int tmp;
 
@@ -10,10 +10,25 @@ void	swap(int *a, int *b)
 	*b = tmp;
 }
 
-// void	bubble_sort(int *arr,)
-// {
-	    //  
-// }
+void	bubble_sort(int *arr,int size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - i - 1)
+		{
+			if (arr[j] > arr[j + 1])
+				swap_bubble(&arr[j], &arr[j + 1]);
+			j++;
+		}
+		i++;
+	}
+	
+}
 
 void	big_sort(list **head_a, list **head_b)
 {
@@ -37,6 +52,9 @@ void	big_sort(list **head_a, list **head_b)
 		tmp = tmp->next;
 		i++;
 	}
+	// sorting
+	// ft_printf("the first element in the arr is ")
+	bubble_sort(arr, size_head);
 	// printing
 	i = 0;
 	while (i < size_head)
