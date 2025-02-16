@@ -327,8 +327,9 @@ int	main(int ac, char **av)
 	// int	size_head;
 
 	head = stock_arg(ac , av);
+	
 	head_b = NULL;
-	head_b++;
+	// head_b++;
 	if (stock_arg(ac , av) == NULL)
 		return(ft_printf("Error"),1);
 	// size_head = ft_lstsize(head);
@@ -391,8 +392,5 @@ int	main(int ac, char **av)
 	// printlist(head);
 	// ft_printf("pile b	 : -----------------------\n");
 	// printlist(head_b);
-
-	
-
 }
 

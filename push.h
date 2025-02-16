@@ -1,6 +1,9 @@
 #ifndef PUSH_H
 # define PUSH_H
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "./ft_printf/ft_printf.h"
 typedef struct list
 {
@@ -42,5 +45,9 @@ void	sort_four_numbers(list **head_a, list **head_b);
 void	sort_five_numbers(list **head_a, list **head_b);
 void	big_sort(list **head_a, list **head_b);
 int	check_if_sorted(list **head_a);
+
+
+
+
 
 #endif

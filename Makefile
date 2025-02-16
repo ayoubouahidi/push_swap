@@ -25,7 +25,7 @@
 SRC		= linked.c ft_split.c push_swap.c swap.c push.c rotate.c reverse.c sorting_1.c big_sort.c
 CC		= cc
 OBJS	= $(SRC:.c=.o)
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 NAME	= push_swap
 L_CRT	= ar rcs
 MK		= make
