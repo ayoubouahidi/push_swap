@@ -82,3 +82,20 @@ list	*ft_lstlast(list *lst)
 	}
 	return (last);
 }
+
+void	ft_lstclear(list **lst)
+{
+	list	*tmp;
+	list	*current;
+
+	if (lst == NULL || !*lst)
+		return ;
+	current = *lst;
+	while (current != NULL)
+	{
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	*lst = NULL;
+}

@@ -97,4 +97,5 @@ void	big_sort(list **head_a, list **head_b)
 	range = find_range(size_head);
 	pushing_to_b(head_a, head_b, arr, range, size_head);
 	push_to_a(head_a, head_b);	
+	free(arr);
 }

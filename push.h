@@ -21,6 +21,7 @@ int		ft_lstsize(list *lst);
 void	ft_lstadd_front(list **lst, list *new);
 list	*ft_lstlast(list *lst);
 void	printlist(list *head);
+void	ft_lstclear(list **lst);
 //-------------parse functions-------------//
 char	**ft_split(char const *s, char c);
 
@@ -61,6 +62,7 @@ int get_index(int value, int *arr, int size);
 void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size);
 int	max_index(list *head);
 void push_to_a(list **head_a, list **head_b);
+long		ft_atoi(const char *str, list **head);
 
 
 #endif

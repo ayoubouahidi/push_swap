@@ -16,11 +16,19 @@
 #include "./ft_printf/ft_printf.h"
 #include <stdio.h>
 
-int	check_max(long nbr)
+void	free_split(char **str)
 {
-	if (nbr > 2147483647 || nbr > -2147483648)
-		return (0);
-	return (1);
+	int i;
+
+	i = 0;
+	if(!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 int	lenght(char *av)
@@ -108,29 +116,46 @@ list	*stock_arg(int ac, char **av)
 				j++;
 			}
 			if (ft_strchr(av[i], 32))
-			{
+			{ 
 				j = 0;
 				str_arg = ft_split(av[i], 32);
 				while (str_arg[j])
 				{
-					if (!isvalid(str_arg[j]) || check_max(ft_atoi(str_arg[j])))
+					if (!isvalid(str_arg[j]))
+					{
+						free_split(str_arg);
+						ft_lstclear(&head);
 						return (NULL);
-					new = ft_newnode(ft_atoi(str_arg[j]));
+					}
+					new = ft_newnode(ft_atoi(str_arg[j], &head));
+					if(!new)
+					{
+						ft_lstclear(&head);
+						return (NULL);					
+					}
 					ft_lstadd_back(&head, new);
 					j++;
 				}
+				free_split(str_arg);
 			}
 			else
 			{
-				if (!isvalid(av[i]) || check_max(ft_atoi(av[i])))
+
+				if (!isvalid(av[i]))
+				{
+					ft_lstclear(&head);
 					return (NULL);
-				new = ft_newnode(ft_atoi(av[i]));
+				}
+				new = ft_newnode(ft_atoi(av[i], &head));
 				ft_lstadd_back(&head, new);
 			}
 			i++;
 		}
 		if (check(head) == 1)
+		{
+			ft_lstclear(&head);
 			return (NULL);
+		}
 		return(head);
 	}
 	else
@@ -147,7 +172,7 @@ int	main(int ac, char **av)
 		return (0);
 	head = stock_arg(ac , av);
 	head_b = NULL;
-	if (stock_arg(ac , av) == NULL)
+	if (head == NULL)
 		return(ft_printf("Error"),1);
 	if (check_if_sorted(&head))
 	{
@@ -163,5 +188,6 @@ int	main(int ac, char **av)
 		else
 			big_sort(&head, &head_b);
 	}
+	ft_lstclear(&head);
 }
 
