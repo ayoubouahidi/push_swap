@@ -190,50 +190,11 @@ int get_index(int value, int *arr, int size)
 	return(-1);
 }
 
-void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
-{
-	int start;
-	(void)arr;
-	int size909 = ft_lstsize(*head_a);
-	// tmp = *head_a;
-	start = 0;
-    // printlist(*head_a);
-	while (*head_a)
-	{
-		// ft_printf("the head a data is %d\n", (*head_a)->data);
-		// ft_printf("a data is %d\n", (*head_a)->data);
-		if (get_index((*head_a)->data, arr, size909) <= ft_lstsize(*head_b))
-		{
-			push(head_a, head_b);
-			// printf("befor start [%d],,,,end [%d] \n", start, end);
-			rotate(head_b, 'b');
-			// rotate_stack_b(head_b);
-			update_range(&start, &end, size);
-			// printf("after start [%d],,,,end [%d] \n", start, end);
-		}
-		else if (get_index((*head_a)->data, arr, size909) <= ft_lstsize(*head_b) + ft_lstsize(*head_a) / 10)
-		{
-			push(head_a, head_b);
-			if ((*head_b) && (*head_b)->next && (*head_b)->data < (*head_b)->next->data)
-				swap(*head_b, 98);
-			// printf("befor start [%d],,,,end [%d] \n", start, end);
-			update_range(&start, &end, size);
-			// printf("after start [%d],,,,end [%d] \n", start, end);
-
-		}
-		else
-			rotate(head_a, 'a');
-			
-		// *head_a = (*head_a)->next;
-	}
-	// printlist(*head_b);
-	
-}
-
 // void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 // {
 // 	int start;
-
+// 	(void)arr;
+// 	int size909 = ft_lstsize(*head_a);
 // 	// tmp = *head_a;
 // 	start = 0;
 //     // printlist(*head_a);
@@ -241,9 +202,8 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 // 	{
 // 		// ft_printf("the head a data is %d\n", (*head_a)->data);
 // 		// ft_printf("a data is %d\n", (*head_a)->data);
-// 		if ((*head_a)->data <= arr[start])
+// 		if (get_index((*head_a)->data, arr, size909) <= ft_lstsize(*head_b))
 // 		{
-// 			// printf("push ssss\n");
 // 			push(head_a, head_b);
 // 			// printf("befor start [%d],,,,end [%d] \n", start, end);
 // 			rotate(head_b, 'b');
@@ -251,7 +211,7 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 // 			update_range(&start, &end, size);
 // 			// printf("after start [%d],,,,end [%d] \n", start, end);
 // 		}
-// 		else if ((*head_a)->data <= arr[end])
+// 		else if (get_index((*head_a)->data, arr, size909) <= ft_lstsize(*head_b) + ft_lstsize(*head_a) / 10)
 // 		{
 // 			push(head_a, head_b);
 // 			if ((*head_b) && (*head_b)->next && (*head_b)->data < (*head_b)->next->data)
@@ -263,11 +223,49 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 // 		}
 // 		else
 // 			rotate(head_a, 'a');
+			
 // 		// *head_a = (*head_a)->next;
 // 	}
 // 	// printlist(*head_b);
 	
 // }
+
+void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
+{
+	int start;
+
+	// tmp = *head_a;
+	start = 0;
+    // printlist(*head_a);
+	while (*head_a)
+	{
+		// ft_printf("the head a data is %d\n", (*head_a)->data);
+		// ft_printf("a data is %d\n", (*head_a)->data);
+		if ((*head_a)->data <= arr[start])
+		{
+			// printf("push ssss\n");
+			push(head_a, head_b);
+			// printf("befor start [%d],,,,end [%d] \n", start, end);
+			rotate(head_b, 'b');
+			// rotate_stack_b(head_b);
+			update_range(&start, &end, size);
+			// printf("after start [%d],,,,end [%d] \n", start, end);
+		}
+		else if ((*head_a)->data <= arr[end])
+		{
+			push(head_a, head_b);
+			if ((*head_b) && (*head_b)->next && (*head_b)->data < (*head_b)->next->data)
+				swap(*head_b, 98);
+			// printf("befor start [%d],,,,end [%d] \n", start, end);
+			update_range(&start, &end, size);
+			// printf("after start [%d],,,,end [%d] \n", start, end);
+
+		}
+		else
+			rotate(head_a, 'a');
+	}
+	
+}
 
 int	max_index(list *head)
 {
@@ -285,7 +283,6 @@ int	max_index(list *head)
 		head = head->next;
 		i++;
 	}
-	// ft_printf("ther max is : %d\n the pos is %d\n", max, i_max);
 	return (i_max);
 }
 
@@ -311,8 +308,6 @@ void	big_sort(list **head_a, list **head_b)
 	int i;
 	int range;
 
-	// head_b++;
-	// ft_printf("im here");
 	tmp = *head_a;
 	i = 0;
 	size_head = ft_lstsize(*head_a);
@@ -326,31 +321,8 @@ void	big_sort(list **head_a, list **head_b)
 		tmp = tmp->next;
 		i++;
 	}
-	// sorting
-	// ft_printf("the firt element is %d\n", *arr);
 	bubble_sort(arr, size_head);
 	range = find_range(size_head);
 	pushing_to_b(head_a, head_b, arr, range, size_head);
-	push_to_a(head_a, head_b);
-	// printlist(*head_a);
-	// ft_printf("the range is : %d\n", range);
-	// push_element_stack_b(head_a, head_b, arr, range);
-	// printing
-	// i = 0;
-	// while (i < size_head)
-	// {
-	// 	ft_printf("%d ", arr[i]);
-	// 	i++;
-	// }
-	// ft_printf("\n");
-
-	
-	
+	push_to_a(head_a, head_b);	
 }
-
-// int main()
-// {
-// 	int arr[4] = {1 ,2 , 4, 6};
-// 	int s = check_if_in_range(2, 0, 3,arr);
-// 	printf("s is : %d\n", s);
-// }

@@ -5,6 +5,8 @@
 #include <stdio.h>
 
 #include "./ft_printf/ft_printf.h"
+#include "./libft/libft.h"
+
 typedef struct list
 {
 	int			data;

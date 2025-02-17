@@ -16,194 +16,13 @@
 #include "./ft_printf/ft_printf.h"
 #include <stdio.h>
 
-// strchr
-char	*ft_strchr(const char *str, int c)
+int	check_max(long nbr)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == (char)c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	if (!(char)c)
-		return ((char *)&str[i]);
-	return (NULL);
-}
-
-
-// strjoin
-size_t	ft_strlen(const char *a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	char	*s;
-	size_t	i;
-
-	s = (char *)src;
-	i = 0;
-	if (size == 0)
-	{
-		return (ft_strlen(s));
-	}
-	else
-	{
-		while (s[i] != '\0' && i < size - 1)
-		{
-			dest[i] = s[i];
-			i++;
-		}
-	}
-	dest[i] = '\0';
-	return (ft_strlen(s));
-}
-
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	lendest;
-	size_t	lensrc;
-	size_t	ret;
-
-	if (dest == NULL && size == 0)
-		return (ft_strlen(src));
-	lendest = ft_strlen(dest);
-	lensrc = ft_strlen(src);
-	ret = lendest + lensrc;
-	i = 0;
-	if (lendest >= size)
-		return (lensrc + size);
-	while (src[i] != '\0' && (lendest + 1) < size)
-	{
-		dest[lendest] = src[i];
-		i++;
-		lendest++;
-	}
-	dest[lendest] = '\0';
-	return (ret);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*newstr;
-	size_t	lens1;
-	size_t	lens2;
-
-	if (!s1 || !s2)
-		return (NULL);
-	lens1 = ft_strlen(s1);
-	lens2 = ft_strlen(s2);
-	newstr = (char *)malloc(sizeof(char) * (lens1 + lens2) + 1);
-	if (newstr == NULL)
-		return (NULL);
-	ft_strlcpy(newstr, s1, lens1 + 1);
-	ft_strlcat(newstr, s2, lens2 + lens1 + 1);
-	return (newstr);
-}
-
-// atoi
-static int	fornotminette(int result, int cmpt, int cmpmoins)
-{
-	if (cmpt > 1)
+	if (nbr > 2147483647 || nbr > -2147483648)
 		return (0);
-	if (cmpmoins == 1)
-		return (result * -1);
-	return (result);
+	return (1);
 }
 
-int	ft_atoi(const char *str)
-{
-	int		i;
-	int		cmpt;
-	long	result;
-	int		cmpmoins;
-
-	cmpmoins = 0;
-	result = 0;
-	cmpt = 0;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32 && str[i] != '\0'))
-		i++;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		cmpt++;
-		if (str[i] == '-')
-			cmpmoins++;
-		i++;
-	}
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		result = result * 10 + (str[i] - 48);
-		i++;
-	}
-	result = fornotminette(result, cmpt, cmpmoins);
-	return (result);
-}
-// is digit
-int	ft_isdigit(int a)
-{
-	if ((a >= 48 && a <= 57))
-	{
-		return (1);
-	}
-	return (0);
-}
-
-// char *pile(int ac, char **av)
-// {
-// 	int i;
-// 	char *newtab;
-// 	newtab = malloc(1);
-// 	newtab[0] = '\0';
-
-// 	i = 1;
-// 	if (ac >= 2)
-// 	{
-// 		while (i < ac)
-// 		{
-// 			if (av)
-// 				return NULL;	
-// 			char *temp0 = ft_strjoin(newtab, av[i]);
-//             if (temp0 == NULL) {
-//                 free(newtab);
-//                 return NULL;
-//             }
-//             free(newtab); 
-//             newtab = temp0;
-
-// 			char *temp = ft_strjoin(newtab, " ");
-//             if (temp == NULL) {
-//                 free(newtab);
-//                 return NULL;
-//             }
-//             free(newtab); 
-//             newtab = temp;
-
-// 			i++;
-// 		}
-// 		return(newtab);
-// 	}
-// }
-
-// int	main(int ac, char **av)
-// {
-// 	char *pile_usr;
-
-// 	pile_usr = pile(ac, av);
-// 	// iterer dans le tableau
-// 	printf("%s\n", pile_usr);
-// }
 int	lenght(char *av)
 {
 	int	i;
@@ -230,8 +49,6 @@ char	*isvalid(char *av)
 			return (NULL);
 		i++;
 	}
-	// if (i == 1)
-	// 	return(NULL);
 	return ("is valid ");
 }
 
@@ -266,6 +83,7 @@ int	check(list *head)
 	return 0;
 }
 
+
 list	*stock_arg(int ac, char **av)
 {
 	list *head;
@@ -276,7 +94,6 @@ list	*stock_arg(int ac, char **av)
 
 	i = 1;
 	head = NULL;
-	// ft_printf("ayoub ouahidi\n");
 	if (ac >= 2)
 	{
 		while(av[i])
@@ -296,7 +113,7 @@ list	*stock_arg(int ac, char **av)
 				str_arg = ft_split(av[i], 32);
 				while (str_arg[j])
 				{
-					if (!isvalid(str_arg[j]))
+					if (!isvalid(str_arg[j]) || check_max(ft_atoi(str_arg[j])))
 						return (NULL);
 					new = ft_newnode(ft_atoi(str_arg[j]));
 					ft_lstadd_back(&head, new);
@@ -305,7 +122,7 @@ list	*stock_arg(int ac, char **av)
 			}
 			else
 			{
-				if (!isvalid(av[i]))
+				if (!isvalid(av[i]) || check_max(ft_atoi(av[i])))
 					return (NULL);
 				new = ft_newnode(ft_atoi(av[i]));
 				ft_lstadd_back(&head, new);
@@ -324,73 +141,27 @@ int	main(int ac, char **av)
 {
 	list	*head;
 	list	*head_b;
-	// int	size_head;
+	int	size_head;
 
+	if(ac == 1)
+		return (0);
 	head = stock_arg(ac , av);
-	
 	head_b = NULL;
-	// head_b++;
 	if (stock_arg(ac , av) == NULL)
 		return(ft_printf("Error"),1);
-	// size_head = ft_lstsize(head);
-	// if (size_head <= 2)
-	// 	sort_two_numbers(&head);
-	// else if(size_head <= 3)
-	// 	sort_tree_numbers(&head);
-	// else if(size_head <= 4)
-	// 	sort_four_numbers(&head, &head_b);
-	// else if(size_head <= 5)
-	// 	sort_five_numbers(&head, &head_b);
-	// ********** */swapping 
-	// swap(head, 'b');
-	// swap_ab(head, head_b);
-
-	// //	********** */pushing
-	// printlist(head); 
-	// push(&head, &head_b);
-	// push(&head, &head_b);
-	// push(&head, &head_b);
-	// push(&head, &head_b);
-
-
-	// push_b(&head_b, &head);
-	// push_b(&head_b, &head);
-	// push_b(&head_b, &head);
-	// push_b(&head_b, &head);
-
-	// //********** */ rotation
-	// rotate(&head, 'a');
-	// rotate(&head_b, 'b');
-	// rotate_ab(&head, &head_b);
-
-	// //	********** */reverse
-	// reverse(&head,'a');
-	// reverse(&head_b, 'b');
-	// reverse_ab(&head, &head_b);
-
-	// //	********** */ ssorting 
-	// printf("the head data is :%d \nthe next data is %d\n the next next head is : %d\n" , head->data, head->next->data, head->next->next->data);
-	// sort_two_numbers(&head->data, &head->next->data);
-	// sort_two_numbers(&head->data, &head->next->data);
-	// printlist(head); 
-	// sort_tree_numbers(&head->data, &head->next->data, &head->next->next->data);
-	// sort_four_numbers(&head, &head_b);
-	// sort_tree_numbers(&head);
-	// sort_two_numbers(&head);
-	// sort_five_numbers(&head, &head_b);
-	// sort_five_2(&head, &head_b);
-	// **********************big so
-	// ft_printf("int is %d\n", check_if_sorted(&head));
-	check_if_sorted(&head);
 	if (check_if_sorted(&head))
-		big_sort(&head, &head_b);
-
-
-
-	// // //********** */printing
-	// ft_printf("pile a   : -----------------------\n");
-	// printlist(head);
-	// ft_printf("pile b	 : -----------------------\n");
-	// printlist(head_b);
+	{
+		size_head = ft_lstsize(head);
+		if (size_head <= 2)
+			sort_two_numbers(&head);
+		else if(size_head <= 3)
+			sort_tree_numbers(&head);
+		else if(size_head <= 4)
+			sort_four_numbers(&head, &head_b);
+		else if(size_head <= 5)
+			sort_five_numbers(&head, &head_b);
+		else
+			big_sort(&head, &head_b);
+	}
 }
 

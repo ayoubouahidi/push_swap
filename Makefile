@@ -34,18 +34,36 @@ MK		= make
 FT_PRINTF_DIR	= ./ft_printf
 FT_PRINTF_LIB	= $(FT_PRINTF_DIR)/libftprintf.a
 
+LIBFT_DIR = ./libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
+
 # Rules
 all: $(NAME)
 
-$(NAME): $(OBJS)
+# $(NAME): $(OBJS)
+# 	$(MK) -C $(FT_PRINTF_DIR)
+# 	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_LIB) -o $(NAME)
+# 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $(NAME)
+
+
+$(NAME): $(OBJS) $(FT_PRINTF_LIB) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_LIB) $(LIBFT_LIB) -o $(NAME)
+
+$(FT_PRINTF_LIB):
 	$(MK) -C $(FT_PRINTF_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_LIB) -o $(NAME)
+
+$(LIBFT_LIB):
+	$(MK) -C $(LIBFT_DIR)
 
 clean:
 	rm -f $(OBJS)
+	$(MK) -C $(FT_PRINTF_DIR) clean
+	$(MK) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MK) -C $(FT_PRINTF_DIR) fclean
+	$(MK) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
