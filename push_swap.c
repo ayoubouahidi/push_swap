@@ -157,11 +157,6 @@ list	*stock_arg(int ac, char **av)
 					}
 					// free_exit_1(ft_atoi(str_arg[i]), str_arg);
 					new = ft_newnode(ft_atoi(str_arg[j]));
-					if(!new)
-					{
-						ft_lstclear(&head);
-						return (NULL);					
-					}
 					ft_lstadd_back(&head, new);
 					j++;
 				}
