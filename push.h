@@ -62,7 +62,7 @@ int get_index(int value, int *arr, int size);
 void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size);
 int	max_index(list *head);
 void push_to_a(list **head_a, list **head_b);
-long		ft_atoi(const char *str, list **head);
+long		ft_atoi(const char *str);
 
 
 #endif

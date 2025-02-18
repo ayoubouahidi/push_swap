@@ -37,12 +37,6 @@ void	sort_tree_numbers(list **head)
 	}
 }
 
-//check the minmum, number of the list and do the algo HHHH
-//push the mini to head_b and sort the others one
-
-
-
-
 int	find_index(list	**head_a, int pt)
 {
 	int	index_min;

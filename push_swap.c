@@ -16,6 +16,8 @@
 #include "./ft_printf/ft_printf.h"
 #include <stdio.h>
 
+
+
 void	free_split(char **str)
 {
 	int i;
@@ -31,6 +33,27 @@ void	free_split(char **str)
 	free(str);
 }
 
+void	free_exit_1(long result, 	char **str_arg)
+{
+	if (result > 2147483647  || result < -2147483648)
+	{
+		ft_printf("Error");
+		free_split(str_arg);
+		exit(1);
+	}
+}
+
+void	free_exit_2(long result, 	list **head)
+{
+	if (result > 2147483647  || result < -2147483648)
+	{
+		ft_printf("Error");
+		ft_lstclear(head);
+		exit(1);
+	}
+}
+
+
 int	lenght(char *av)
 {
 	int	i;
@@ -44,6 +67,7 @@ int	lenght(char *av)
 char	*isvalid(char *av)
 {
 	int	i;
+	long result;
 
 	i = 0;
 	if (av[0] != '-' && av[0] != '+' && !ft_isdigit(av[0]))
@@ -57,6 +81,10 @@ char	*isvalid(char *av)
 			return (NULL);
 		i++;
 	}
+	result = ft_atoi(av);
+	if (result > 2147483647  || result < -2147483648)
+		return (NULL);
+	// printf("the result is : %ld\n", result);
 	return ("is valid ");
 }
 
@@ -127,7 +155,8 @@ list	*stock_arg(int ac, char **av)
 						ft_lstclear(&head);
 						return (NULL);
 					}
-					new = ft_newnode(ft_atoi(str_arg[j], &head));
+					// free_exit_1(ft_atoi(str_arg[i]), str_arg);
+					new = ft_newnode(ft_atoi(str_arg[j]));
 					if(!new)
 					{
 						ft_lstclear(&head);
@@ -146,7 +175,8 @@ list	*stock_arg(int ac, char **av)
 					ft_lstclear(&head);
 					return (NULL);
 				}
-				new = ft_newnode(ft_atoi(av[i], &head));
+				// free_exit_2(ft_atoi(str_arg[i]), &head);
+				new = ft_newnode(ft_atoi(av[i]));
 				ft_lstadd_back(&head, new);
 			}
 			i++;
@@ -188,6 +218,6 @@ int	main(int ac, char **av)
 		else
 			big_sort(&head, &head_b);
 	}
+	// printlist(head);
 	ft_lstclear(&head);
 }
-
