@@ -119,13 +119,65 @@ int	check(list *head)
 	return 0;
 }
 
+// helper function stock 
+int	is_valid_arg(char *arg)
+{
+	int j;
+
+	j = 0;
+	while (arg[j])
+	{	
+		if (!ft_isdigit(arg[j]) && arg[j] != 32 && (arg[j] != '+' && arg[j] != '-'))
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
+int	string_process(char **str_arg, list **head)
+{
+	list *new;
+	int j;
+
+	j = 0;
+	while (str_arg[j])
+	{
+		if (!isvalid(str_arg[j]))
+		{
+			free_split(str_arg);
+			ft_lstclear(head);
+			return (0);
+		}
+		// free_exit_1(ft_atoi(str_arg[i]), str_arg);
+		new = ft_newnode(ft_atoi(str_arg[j]));
+		ft_lstadd_back(head, new);
+		j++;
+	}
+	free_split(str_arg);
+	return (1);
+}
+
+int	num_process(char *arg, list **head)
+{
+	list *new;
+
+	if (!isvalid(arg))
+	{
+		ft_lstclear(head);
+		return (0);
+	}
+	new = ft_newnode(ft_atoi(arg));
+	ft_lstadd_back(head, new);
+	return (1);
+}
+
 
 list	*stock_arg(int ac, char **av)
 {
 	list *head;
 	int	i;
-	int j;
-	list *new;
+	// int j;
+	// list *new;
 	char **str_arg;
 
 	i = 1;
@@ -136,43 +188,48 @@ list	*stock_arg(int ac, char **av)
 		{
 			if(av[i][0] == '\0')
 				return (NULL);
-			j = 0;
-			while (av[i][j])
-			{	
-				if (!ft_isdigit(av[i][j]) && av[i][j] != 32 && (av[i][j] != '+' && av[i][j] != '-'))
-					return (NULL);
-				j++;
-			}
+			// j = 0;
+			// while (av[i][j])
+			// {	
+			// 	if (!ft_isdigit(av[i][j]) && av[i][j] != 32 && (av[i][j] != '+' && av[i][j] != '-'))
+			// 		return (NULL);
+			// 	j++;
+			// }
+			if(!is_valid_arg(av[i]))
+				return (NULL);
 			if (ft_strchr(av[i], 32))
 			{ 
-				j = 0;
+				// j = 0;
 				str_arg = ft_split(av[i], 32);
-				while (str_arg[j])
-				{
-					if (!isvalid(str_arg[j]))
-					{
-						free_split(str_arg);
-						ft_lstclear(&head);
-						return (NULL);
-					}
-					// free_exit_1(ft_atoi(str_arg[i]), str_arg);
-					new = ft_newnode(ft_atoi(str_arg[j]));
-					ft_lstadd_back(&head, new);
-					j++;
-				}
-				free_split(str_arg);
+				if (!string_process(str_arg, &head))
+					return (NULL);
+				// while (str_arg[j])
+				// {
+				// 	// if (!isvalid(str_arg[j]))
+				// 	// {
+				// 	// 	free_split(str_arg);
+				// 	// 	ft_lstclear(&head);
+				// 	// 	return (NULL);
+				// 	// }
+				// 	// // free_exit_1(ft_atoi(str_arg[i]), str_arg);
+				// 	// new = ft_newnode(ft_atoi(str_arg[j]));
+				// 	// ft_lstadd_back(&head, new);
+				// 	// j++;
+				// }
+				// free_split(str_arg);
 			}
 			else
 			{
-
-				if (!isvalid(av[i]))
-				{
-					ft_lstclear(&head);
-					return (NULL);
-				}
-				// free_exit_2(ft_atoi(str_arg[i]), &head);
-				new = ft_newnode(ft_atoi(av[i]));
-				ft_lstadd_back(&head, new);
+				if (!num_process(av[i], &head))
+					return(NULL);
+				// if (!isvalid(av[i]))
+				// {
+				// 	ft_lstclear(&head);
+				// 	return (NULL);
+				// }
+				// // free_exit_2(ft_atoi(str_arg[i]), &head);
+				// new = ft_newnode(ft_atoi(av[i]));
+				// ft_lstadd_back(&head, new);
 			}
 			i++;
 		}
