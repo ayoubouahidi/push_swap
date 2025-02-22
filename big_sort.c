@@ -6,37 +6,25 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 {
 	int start;
 
-	// tmp = *head_a;
 	start = 0;
-    // printlist(*head_a);
 	while (*head_a)
 	{
-		// ft_printf("the head a data is %d\n", (*head_a)->data);
-		// ft_printf("a data is %d\n", (*head_a)->data);
 		if ((*head_a)->data <= arr[start])
 		{
-			// printf("push ssss\n");
 			push(head_a, head_b);
-			// printf("befor start [%d],,,,end [%d] \n", start, end);
 			rotate(head_b, 'b');
-			// rotate_stack_b(head_b);
 			update_range(&start, &end, size);
-			// printf("after start [%d],,,,end [%d] \n", start, end);
 		}
 		else if ((*head_a)->data <= arr[end])
 		{
 			push(head_a, head_b);
 			if ((*head_b) && (*head_b)->next && (*head_b)->data < (*head_b)->next->data)
 				swap(*head_b, 98);
-			// printf("befor start [%d],,,,end [%d] \n", start, end);
 			update_range(&start, &end, size);
-			// printf("after start [%d],,,,end [%d] \n", start, end);
-
 		}
 		else
 			rotate(head_a, 'a');
 	}
-	
 }
 
 int	max_index(list *head)

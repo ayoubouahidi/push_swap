@@ -176,72 +176,37 @@ list	*stock_arg(int ac, char **av)
 {
 	list *head;
 	int	i;
-	// int j;
-	// list *new;
 	char **str_arg;
 
 	i = 1;
 	head = NULL;
-	if (ac >= 2)
-	{
-		while(av[i])
-		{
-			if(av[i][0] == '\0')
-				return (NULL);
-			// j = 0;
-			// while (av[i][j])
-			// {	
-			// 	if (!ft_isdigit(av[i][j]) && av[i][j] != 32 && (av[i][j] != '+' && av[i][j] != '-'))
-			// 		return (NULL);
-			// 	j++;
-			// }
-			if(!is_valid_arg(av[i]))
-				return (NULL);
-			if (ft_strchr(av[i], 32))
-			{ 
-				// j = 0;
-				str_arg = ft_split(av[i], 32);
-				if (!string_process(str_arg, &head))
-					return (NULL);
-				// while (str_arg[j])
-				// {
-				// 	// if (!isvalid(str_arg[j]))
-				// 	// {
-				// 	// 	free_split(str_arg);
-				// 	// 	ft_lstclear(&head);
-				// 	// 	return (NULL);
-				// 	// }
-				// 	// // free_exit_1(ft_atoi(str_arg[i]), str_arg);
-				// 	// new = ft_newnode(ft_atoi(str_arg[j]));
-				// 	// ft_lstadd_back(&head, new);
-				// 	// j++;
-				// }
-				// free_split(str_arg);
-			}
-			else
-			{
-				if (!num_process(av[i], &head))
-					return(NULL);
-				// if (!isvalid(av[i]))
-				// {
-				// 	ft_lstclear(&head);
-				// 	return (NULL);
-				// }
-				// // free_exit_2(ft_atoi(str_arg[i]), &head);
-				// new = ft_newnode(ft_atoi(av[i]));
-				// ft_lstadd_back(&head, new);
-			}
-			i++;
-		}
-		if (check(head) == 1)
-		{
-			ft_lstclear(&head);
-			return (NULL);
-		}
-		return(head);
-	}
-	else
+	if (ac < 2)
 		return (NULL);
+	while(av[i])
+	{
+		if(av[i][0] == '\0')
+			return (NULL);
+		if(!is_valid_arg(av[i]))
+			return (NULL);
+		if (ft_strchr(av[i], 32))
+		{ 
+			str_arg = ft_split(av[i], 32);
+			if (!string_process(str_arg, &head))
+				return (NULL);
+		}
+		else
+		{
+			if (!num_process(av[i], &head))
+				return(NULL);
+		}
+		i++;
+	}
+	if (check(head) == 1)
+	{
+		ft_lstclear(&head);
+		return (NULL);
+	}
+	return(head);
 }
 
 int	main(int ac, char **av)
