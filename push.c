@@ -13,26 +13,26 @@
 #include "push.h"
 #include <stdio.h>
 
-void	push(list **head_a, list **head_b)
+void	push(t_list **head_a, t_list **head_b)
 {
-	list *tmp;
+	t_list	*tmp;
 
 	if (*head_a == NULL)
-		return;
+		return ;
 	tmp = *head_a;
 	*head_a = tmp->next;
 	ft_lstadd_front(head_b, tmp);
 	ft_printf("pb\n");
 }
 
-void	push_b(list **head_b, list **head_a)
+void	push_b(t_list **head_b, t_list **head_a)
 {
-	list *tmp;
+	t_list	*tmp;
 
 	if (*head_b == NULL)
-		return;
+		return ;
 	tmp = *head_b;
 	*head_b = tmp->next;
-	ft_lstadd_front(head_a, tmp);	
+	ft_lstadd_front(head_a, tmp);
 	ft_printf("pa\n");
 }

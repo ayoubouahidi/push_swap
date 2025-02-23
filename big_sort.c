@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   big_sort.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayouahid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/22 22:20:15 by ayouahid          #+#    #+#             */
+/*   Updated: 2025/02/22 22:20:17 by ayouahid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
-
-
-void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
+void	pushing_to_b(t_list **head_a, t_list **head_b, int *arr, int end)
 {
-	int start;
+	int	start;
+	int	size;
 
+	size = ft_lstsize(*head_a);
 	start = 0;
 	while (*head_a)
 	{
@@ -18,7 +30,8 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 		else if ((*head_a)->data <= arr[end])
 		{
 			push(head_a, head_b);
-			if ((*head_b) && (*head_b)->next && (*head_b)->data < (*head_b)->next->data)
+			if ((*head_b) && (*head_b)->next
+				&& (*head_b)->data < (*head_b)->next->data)
 				swap(*head_b, 98);
 			update_range(&start, &end, size);
 		}
@@ -27,12 +40,15 @@ void	pushing_to_b(list **head_a, list **head_b, int *arr, int end, int size)
 	}
 }
 
-int	max_index(list *head)
+int	max_index(t_list *head)
 {
-	int max = head->data;
-	int i = 0;
-	int i_max = 0;
+	int	max;
+	int	i;
+	int	i_max;
 
+	max = head->data;
+	i = 0;
+	i_max = 0;
 	while (head)
 	{
 		if (head->data > max)
@@ -46,7 +62,7 @@ int	max_index(list *head)
 	return (i_max);
 }
 
-void push_to_a(list **head_a, list **head_b)
+void	push_to_a(t_list **head_a, t_list **head_b)
 {
 	while (*head_b)
 	{
@@ -60,13 +76,13 @@ void push_to_a(list **head_a, list **head_b)
 	}
 }
 
-void	big_sort(list **head_a, list **head_b)
+void	big_sort(t_list **head_a, t_list **head_b)
 {
-	list *tmp;
-	int *arr;
-	int size_head;
-	int i;
-	int range;
+	t_list	*tmp;
+	int		*arr;
+	int		size_head;
+	int		i;
+	int		range;
 
 	tmp = *head_a;
 	i = 0;
@@ -74,7 +90,6 @@ void	big_sort(list **head_a, list **head_b)
 	arr = malloc(sizeof(int) * size_head);
 	if (arr == NULL)
 		return ;
-
 	while (i < size_head)
 	{
 		arr[i] = (tmp)->data;
@@ -83,7 +98,7 @@ void	big_sort(list **head_a, list **head_b)
 	}
 	bubble_sort(arr, size_head);
 	range = find_range(size_head);
-	pushing_to_b(head_a, head_b, arr, range, size_head);
-	push_to_a(head_a, head_b);	
+	pushing_to_b(head_a, head_b, arr, range);
+	push_to_a(head_a, head_b);
 	free(arr);
 }

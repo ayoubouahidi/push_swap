@@ -14,28 +14,28 @@
 
 void	swap_bubble(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-void	swap_bubble2(list **a)
+void	swap_bubble2(t_list **a)
 {
-	list *tmp;
+	t_list	*tmp;
 
-	if(!a || !*a || !(*a)->next)
+	if (!a || !*a || !(*a)->next)
 		return ;
 	tmp = (*a)->next;
 	(*a)->next = (*a)->next->next;
 	ft_lstadd_front(a, tmp);
 }
 
-void	bubble_sort(int *arr,int size)
+void	bubble_sort(int *arr, int size)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size - 1)
@@ -49,21 +49,20 @@ void	bubble_sort(int *arr,int size)
 		}
 		i++;
 	}
-	
 }
 
-int	check_if_in_range(int head_data, int start , int range,int *arr)
+int	check_if_in_range(int head_data, int start, int range, int *arr)
 {
 	int	i;
 
 	i = start + 1;
-    while (i < start + range)  
-    {
-        if (head_data == arr[i])  
-            return (1);
-        i++;
-    }
-    return (0); 
+	while (i < start + range)
+	{
+		if (head_data == arr[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	check_if_in(int head_data, int start, int *arr)

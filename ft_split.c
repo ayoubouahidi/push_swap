@@ -61,11 +61,11 @@ static void	clean(char **str, int j)
 
 	i = 0;
 	while (j > i)
-		free (str[i++]);
-	free (str);
+		free(str[i++]);
+	free(str);
 }
 
-static char	**fill_str(char **str, char const *s, char c, size_t	i)
+static char	**fill_str(char **str, char const *s, char c, size_t i)
 {
 	size_t	j;
 

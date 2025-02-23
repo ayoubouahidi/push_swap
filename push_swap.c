@@ -10,20 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdlib.h>
-#include "push.h"
 #include "./ft_printf/ft_printf.h"
+#include "push.h"
 #include <stdio.h>
-
-
+#include <stdlib.h>
 
 void	free_split(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if(!str)
+	if (!str)
 		return ;
 	while (str[i])
 	{
@@ -33,113 +30,14 @@ void	free_split(char **str)
 	free(str);
 }
 
-void	free_exit_1(long result, 	char **str_arg)
+int	string_process(char **str_arg, t_list **head)
 {
-	if (result > 2147483647  || result < -2147483648)
-	{
-		ft_printf("Error");
-		free_split(str_arg);
-		exit(1);
-	}
-}
-
-void	free_exit_2(long result, 	list **head)
-{
-	if (result > 2147483647  || result < -2147483648)
-	{
-		ft_printf("Error");
-		ft_lstclear(head);
-		exit(1);
-	}
-}
-
-
-int	lenght(char *av)
-{
-	int	i;
-
-	i = 0;
-	while (av[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*isvalid(char *av)
-{
-	int	i;
-	long result;
-
-	i = 0;
-	if (av[0] != '-' && av[0] != '+' && !ft_isdigit(av[0]))
-		return (NULL);
-	if((av[0] == '-' || av[0] == '+') && lenght(av) == 1)
-		return (NULL);
-	i++;
-	while (av[i] !=  '\0')
-	{
-		if(!ft_isdigit(av[i]))
-			return (NULL);
-		i++;
-	}
-	result = ft_atoi(av);
-	if (result > 2147483647  || result < -2147483648)
-		return (NULL);
-	// printf("the result is : %ld\n", result);
-	return ("is valid ");
-}
-
-void	printlist(list *head)
-{
-	list	*tmp;
-	tmp = head;
-	while (tmp != NULL)
-	{
-		printf("%d\n", tmp->data);
-		tmp = tmp->next;
-	}
-}
-
-int	check(list *head)
-{	
-	int	data_act;
-	list *tmp;
-
-	while (head)
-	{
-		data_act = head->data;
-		head = head->next;
-		tmp = head;
-		while (tmp)
-		{
-			if (data_act == tmp->data)
-				return 1;
-			tmp = tmp->next;
-		}
-	}
-	return 0;
-}
-
-// helper function stock 
-int	is_valid_arg(char *arg)
-{
-	int j;
+	t_list	*new;
+	int		j;
 
 	j = 0;
-	while (arg[j])
-	{	
-		if (!ft_isdigit(arg[j]) && arg[j] != 32 && (arg[j] != '+' && arg[j] != '-'))
-			return (0);
-		j++;
-	}
-	return (1);
-}
-
-int	string_process(char **str_arg, list **head)
-{
-	list *new;
-	int j;
-
-	j = 0;
+	if (!str_arg[j])
+		return (0);
 	while (str_arg[j])
 	{
 		if (!isvalid(str_arg[j]))
@@ -148,7 +46,6 @@ int	string_process(char **str_arg, list **head)
 			ft_lstclear(head);
 			return (0);
 		}
-		// free_exit_1(ft_atoi(str_arg[i]), str_arg);
 		new = ft_newnode(ft_atoi(str_arg[j]));
 		ft_lstadd_back(head, new);
 		j++;
@@ -157,9 +54,9 @@ int	string_process(char **str_arg, list **head)
 	return (1);
 }
 
-int	num_process(char *arg, list **head)
+int	num_process(char *arg, t_list **head)
 {
-	list *new;
+	t_list	*new;
 
 	if (!isvalid(arg))
 	{
@@ -171,70 +68,58 @@ int	num_process(char *arg, list **head)
 	return (1);
 }
 
-
-list	*stock_arg(int ac, char **av)
+t_list	*stock_arg(int ac, char **av)
 {
-	list *head;
-	int	i;
-	char **str_arg;
+	t_list	*head;
+	int		i;
 
 	i = 1;
 	head = NULL;
 	if (ac < 2)
 		return (NULL);
-	while(av[i])
+	while (av[i])
 	{
-		if(av[i][0] == '\0')
-			return (NULL);
-		if(!is_valid_arg(av[i]))
-			return (NULL);
+		if (av[i][0] == '\0' || !is_valid_arg(av[i]))
+			return (ft_lstclear(&head), NULL);
 		if (ft_strchr(av[i], 32))
-		{ 
-			str_arg = ft_split(av[i], 32);
-			if (!string_process(str_arg, &head))
-				return (NULL);
-		}
-		else
 		{
-			if (!num_process(av[i], &head))
-				return(NULL);
+			if (!string_process(ft_split(av[i], 32), &head))
+				return (ft_lstclear(&head), NULL);
 		}
+		else if (!num_process(av[i], &head))
+			return (NULL);
 		i++;
 	}
 	if (check(head) == 1)
-	{
-		ft_lstclear(&head);
-		return (NULL);
-	}
-	return(head);
+		return (ft_lstclear(&head), NULL);
+	return (head);
 }
 
 int	main(int ac, char **av)
 {
-	list	*head;
-	list	*head_b;
-	int	size_head;
+	t_list	*head;
+	t_list	*head_b;
+	int		size_head;
 
-	if(ac == 1)
+	if (ac == 1)
 		return (0);
-	head = stock_arg(ac , av);
+	head = stock_arg(ac, av);
 	head_b = NULL;
 	if (head == NULL)
-		return(ft_printf("Error"),1);
+		return (ft_printf("Error"), 1);
 	if (check_if_sorted(&head))
 	{
 		size_head = ft_lstsize(head);
 		if (size_head <= 2)
 			sort_two_numbers(&head);
-		else if(size_head <= 3)
+		else if (size_head <= 3)
 			sort_tree_numbers(&head);
-		else if(size_head <= 4)
+		else if (size_head <= 4)
 			sort_four_numbers(&head, &head_b);
-		else if(size_head <= 5)
+		else if (size_head <= 5)
 			sort_five_numbers(&head, &head_b);
 		else
 			big_sort(&head, &head_b);
 	}
-	// printlist(head);
 	ft_lstclear(&head);
 }

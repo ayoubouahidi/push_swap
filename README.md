@@ -1,10 +1,10 @@
 // ---------------------parsing-------------------------------//
 
 //is number : 121 22 d
-//striinng innside string : 12 "77" 12 "                      66"
+//striinng innside string : 12 "77"12 "                      66"
 //is duplicated : 33 33 4422 4345 56
 //empty sstring : 233 ""
-//sign : 45 - 4 444 5556 + 
+//sign : 45 - 4 444 5556 +
 // one argument : 1 ---- should desplay a newline not error
  
 //----------- dont forget to check the leak ------------------------//

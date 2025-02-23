@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "push.h"
+#include <unistd.h>
 
-
-
-void	swap(list *head, char type)
+void	swap(t_list *head, char type)
 {
 	int	n;
 	int	tmp;
@@ -26,20 +24,18 @@ void	swap(list *head, char type)
 	else if (type == 'b')
 		ft_printf("sb\n");
 	if (n <= 1)
-		return;
+		return ;
 	else
 	{
 		tmp = head->data;
 		head->data = head->next->data;
-		head->next->data = tmp;		
+		head->next->data = tmp;
 	}
-	
 }
 
-void	swap_ab(list *head_a, list *head_b)
+void	swap_ab(t_list *head_a, t_list *head_b)
 {
 	swap(head_a, 's');
 	swap(head_b, 's');
 	ft_printf("ss\n");
 }
-

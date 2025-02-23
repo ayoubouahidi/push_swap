@@ -15,22 +15,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-list	*ft_newnode(int	data)
+t_list	*ft_newnode(int data)
 {
-	list *tmp;
+	t_list	*tmp;
 
-	tmp = (list	*)malloc(sizeof(list));
-	if(!tmp)
+	tmp = (t_list *)malloc(sizeof(t_list));
+	if (!tmp)
 		return (NULL);
 	tmp->data = data;
 	tmp->next = NULL;
 	return (tmp);
 }
 
-
-void	ft_lstadd_back(list **lst, list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	list	*tmp;
+	t_list	*tmp;
 
 	if (!lst || !new)
 		return ;
@@ -45,7 +44,7 @@ void	ft_lstadd_back(list **lst, list *new)
 		*lst = new;
 }
 
-int	ft_lstsize(list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	cmpt;
 
@@ -58,7 +57,7 @@ int	ft_lstsize(list *lst)
 	return (cmpt);
 }
 
-void	ft_lstadd_front(list **lst, list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (new == NULL || lst == NULL)
 		return ;
@@ -66,9 +65,9 @@ void	ft_lstadd_front(list **lst, list *new)
 	*lst = new;
 }
 
-list	*ft_lstlast(list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	list	*last;
+	t_list	*last;
 
 	if (!lst)
 		return (NULL);
@@ -81,21 +80,4 @@ list	*ft_lstlast(list *lst)
 		lst = lst->next;
 	}
 	return (last);
-}
-
-void	ft_lstclear(list **lst)
-{
-	list	*tmp;
-	list	*current;
-
-	if (lst == NULL || !*lst)
-		return ;
-	current = *lst;
-	while (current != NULL)
-	{
-		tmp = current->next;
-		free(current);
-		current = tmp;
-	}
-	*lst = NULL;
 }

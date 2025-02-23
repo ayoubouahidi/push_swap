@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   big_sort_help2.c                                   :+:      :+:    :+:   */
+/*   linked_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayouahid <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 11:57:19 by ayouahid          #+#    #+#             */
-/*   Updated: 2025/02/17 11:57:25 by ayouahid         ###   ########.fr       */
+/*   Created: 2025/02/22 20:30:44 by ayouahid          #+#    #+#             */
+/*   Updated: 2025/02/22 20:30:46 by ayouahid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push.h"
 
-int	find_range(int size)
+void	ft_lstclear(t_list **lst)
 {
-	if (size > 5 && size <= 100)
-		return (size / 5);
-	else if (size > 100 && size <= 500)
-		return (size / 12);
-	else
-		return (20);
-}
+	t_list	*tmp;
+	t_list	*current;
 
-void	update_range(int *start, int *end, int size)
-{
-	if (*start < *end - 1)
-		(*start)++;
-	if (*end < size - 1)
-		(*end)++;
-}
-
-int	get_index(int value, int *arr, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
+	if (lst == NULL || !*lst)
+		return ;
+	current = *lst;
+	while (current != NULL)
 	{
-		if (arr[i] == value)
-			return (i);
-		i++;
+		tmp = current->next;
+		free(current);
+		current = tmp;
 	}
-	return (-1);
+	*lst = NULL;
 }

@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push.h"
 
-void	reverse(list **head, char t)
+void	reverse(t_list **head, char t)
 {
-	list *last;
-	list *tmp;
+	t_list	*last;
+	t_list	*tmp;
 
 	if (!*head)
 		return ;
@@ -34,7 +33,7 @@ void	reverse(list **head, char t)
 		ft_printf("rrb\n");
 }
 
-void	reverse_ab(list **head_a, list **head_b)
+void	reverse_ab(t_list **head_a, t_list **head_b)
 {
 	if (!*head_a || !*head_b)
 		return ;
